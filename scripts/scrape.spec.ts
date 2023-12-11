@@ -4,12 +4,12 @@ import fs from "fs";
 import { JobInfo } from "../types/JobInfo";
 
 let positionName = "Software Engineer";
-let areaName = "Sydney";
 let onlyInterns = true;
 let pom:POM;
 let page:Page;
 
 let results:JobInfo[];
+//npx playwright test --grep @all workers=1
 
 test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
@@ -30,14 +30,14 @@ test.afterAll(async () => {
             console.error("Error writing file:", err);
             return;
         }
-        console.log("Object saved to output.txt");
+        console.log("Saved to output.txt");
     });
 });
 
 test("scrape IMC @IMC @all", async () => {
     const imc = pom.getImc();
     await imc.goToPage();
-    await imc.fillSearchBar(positionName + " " + areaName);
+    await imc.fillSearchBar(positionName);
     await imc.clickSearchButton();
 
     await expect(
@@ -73,38 +73,41 @@ test("scrape jane street @JaneStreet @all", async () => {
     results = results.concat(res);
 });
 
-// test("scrape citadel", async ({ page }) => {
+test("scrape citadel @Citadel @all", async () => {
+    const citadel = pom.getCitadel();
+    await citadel.goToPage();
+    const res = await citadel.getAllJobs();
+    results = results.concat(res);
+});
+
+// test("scrape sig", async () => {
 //     await page.goto("https://playwright.dev/");
 // });
 
-// test("scrape sig", async ({ page }) => {
+// test("scrape atlassian", async () => {
 //     await page.goto("https://playwright.dev/");
 // });
 
-// test("scrape atlassian", async ({ page }) => {
+// test("scrape google", async () => {
 //     await page.goto("https://playwright.dev/");
 // });
 
-// test("scrape google", async ({ page }) => {
+// test("scrape amazon", async () => {
 //     await page.goto("https://playwright.dev/");
 // });
 
-// test("scrape amazon", async ({ page }) => {
+// test("scrape canva", async () => {
 //     await page.goto("https://playwright.dev/");
 // });
 
-// test("scrape canva", async ({ page }) => {
+// test("scrape slack", async () => {
 //     await page.goto("https://playwright.dev/");
 // });
 
-// test("scrape slack", async ({ page }) => {
+// test("scrape seek", async () => {
 //     await page.goto("https://playwright.dev/");
 // });
 
-// test("scrape seek", async ({ page }) => {
-//     await page.goto("https://playwright.dev/");
-// });
-
-// test("scrape microsoft", async ({ page }) => {
+// test("scrape microsoft", async () => {
 //     await page.goto("https://playwright.dev/");
 // });

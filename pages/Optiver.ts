@@ -86,7 +86,7 @@ class Optiver {
         await this.page.waitForTimeout(2000);
         await this.clickLoadMore();
 
-        const jobResults = await this.elements.jobResults;
+        const jobResults = this.elements.jobResults;
         const jobInfo: JobInfo[] = [];
 
         for (let i = 0 ; i < await jobResults.count(); i++) {
@@ -110,8 +110,6 @@ class Optiver {
                 link,
             });
         }
-
-        console.log(jobInfo);
 
         return jobInfo;
     }

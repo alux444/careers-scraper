@@ -16,7 +16,7 @@ class JaneStreet {
     }
 
     async goToPage(jobType:JobType) {
-        let type;
+        let type:string;
 
         switch (jobType) {
             case "Internship":
@@ -40,7 +40,7 @@ class JaneStreet {
 
         await this.page.waitForTimeout(2000);
 
-        const jobResults = await this.elements.jobResults;
+        const jobResults = this.elements.jobResults;
         const jobInfo: JobInfo[] = [];
 
         for (let i = 0 ; i < await jobResults.count(); i++) {
