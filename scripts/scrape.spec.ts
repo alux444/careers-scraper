@@ -9,8 +9,7 @@ let pom:POM;
 let page:Page;
 
 let results:JobInfo[];
-//npx playwright test --grep @all workers=1
-
+//npx playwright test --grep @all
 test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
     pom = new POM(page);
@@ -25,12 +24,12 @@ test.afterAll(async () => {
     }
 
     const jsonString = JSON.stringify(results, null, 2);
-    fs.writeFile("output.txt", jsonString, (err) => {
+    fs.writeFile("results.txt", jsonString, (err) => {
         if (err) {
             console.error("Error writing file:", err);
             return;
         }
-        console.log("Saved to output.txt");
+        console.log("Results saved.");
     });
 });
 
@@ -80,9 +79,13 @@ test("scrape citadel @Citadel @all", async () => {
     results = results.concat(res);
 });
 
-// test("scrape sig", async () => {
-//     await page.goto("https://playwright.dev/");
-// });
+test("scrape sig @SIG @all", async () => {
+    const sig = pom.getSIG();
+    await sig.goToPage();
+    await sig.filterToStudents();
+    const res = await sig.getAllPagesJobs();
+    results = results.concat(res);
+});
 
 // test("scrape atlassian", async () => {
 //     await page.goto("https://playwright.dev/");
