@@ -1,4 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
+import { JobInfo } from "../types/JobInfo";
 
 class Optiver {
     page: Page;
@@ -115,12 +116,6 @@ class Optiver {
         return jobInfo;
     }
 }
-
-type JobInfo = {
-    title: string | null;
-    location: string | null;
-    link: string | null;
-};
 
 type JobType = "Internship" | "Student and Graduate" | "Experienced" | "All Levels";
 

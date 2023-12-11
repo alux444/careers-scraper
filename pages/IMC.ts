@@ -1,4 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
+import { JobInfo } from "../types/JobInfo";
 
 class IMC {
     page: Page;
@@ -159,11 +160,5 @@ class IMC {
         return res;
     }
 }
-
-type JobInfo = {
-    title: string | null;
-    location: string | null;
-    link: string | null;
-};
 
 export default IMC;
