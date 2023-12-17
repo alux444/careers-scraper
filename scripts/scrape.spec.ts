@@ -87,9 +87,12 @@ test("scrape sig @SIG @all", async () => {
     results = results.concat(res);
 });
 
-// test("scrape atlassian", async () => {
-//     await page.goto("https://playwright.dev/");
-// });
+test("scrape atlassian @Atlassian @all", async () => {
+    const atlassian = pom.getAtlassian();
+    await atlassian.goToPage(positionName);
+    const res = await atlassian.getAllJobs();
+    results = results.concat(res);
+});
 
 // test("scrape google", async () => {
 //     await page.goto("https://playwright.dev/");
